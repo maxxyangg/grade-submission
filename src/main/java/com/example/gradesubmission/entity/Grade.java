@@ -12,5 +12,6 @@ public class Grade {
     private Student student;
     private Course course;
 
+    private String test;
     
 }
