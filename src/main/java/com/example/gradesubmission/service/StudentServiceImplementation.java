@@ -52,7 +52,7 @@ public class StudentServiceImplementation implements StudentService{
         return (List<Student>) studentRepository.findAll();
     }
 
-    public Student unwrapStudent(Optional<Student> wrappedOptional, Long id){
+    public static Student unwrapStudent(Optional<Student> wrappedOptional, Long id){
         if(wrappedOptional.isPresent()){
             return wrappedOptional.get();
         }else{
