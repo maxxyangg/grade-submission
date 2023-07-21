@@ -2,6 +2,7 @@ package com.example.gradesubmission.entity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,10 +18,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +64,7 @@ public class Student {
         joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id")
     )
-    private List<Course> courses;
+    private Set<Course> courses;
 
     
 

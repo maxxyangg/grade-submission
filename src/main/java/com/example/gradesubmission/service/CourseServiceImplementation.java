@@ -2,9 +2,9 @@ package com.example.gradesubmission.service;
 
 import java.util.Optional;
 
-import javax.management.RuntimeErrorException;
 
 import org.springframework.stereotype.Service;
+
 
 import com.example.gradesubmission.entity.Course;
 import com.example.gradesubmission.exception.EntityNotFoundException;
@@ -32,10 +32,16 @@ public class CourseServiceImplementation implements CourseService {
     }
 
     @Override
-    public Course updateCourse(Course course, Long courseId) {
+    public Course updateCourse(Course course,Long courseId) {
         Optional<Course> wrappedCourse = courseRepository.findById(courseId);
         Course unwrappedCourse = unwrapCourse(wrappedCourse, courseId);
         return update(course, unwrappedCourse);
+    }
+
+    @Override
+    public void deleteCourse(Long courseId){
+        Optional<Course> wrappedCourse = courseRepository.findById(courseId);
+        courseRepository.delete(unwrapCourse(wrappedCourse, courseId));
     }
 
     public static Course unwrapCourse(Optional<Course> wrappedCourse, Long courseId) {

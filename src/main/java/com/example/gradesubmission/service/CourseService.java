@@ -6,5 +6,6 @@ public interface CourseService {
     Course getCourse(Long courseId);
     Course createCourse(Course course);
     Course updateCourse(Course course, Long courseId);
-    
+    void deleteCourse(Long courseId);
+
 }
