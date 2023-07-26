@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.gradesubmission.entity.Course;
+import com.example.gradesubmission.entity.Grade;
 import com.example.gradesubmission.entity.Student;
 import com.example.gradesubmission.repository.CourseRepository;
 import com.example.gradesubmission.repository.StudentRepository;
@@ -48,6 +49,8 @@ public class GradeSubmissionApplication implements CommandLineRunner{
 		for (int i = 0; i < courses.length; i++) {
 			courseRepository.save(courses[i]);
 		}
+
+
 	}
 
 	

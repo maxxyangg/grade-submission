@@ -1,6 +1,7 @@
 package com.example.gradesubmission.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -56,7 +57,10 @@ public class Course {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
-    private List<Student> students;
+    @JoinTable(
+        name = "course_student", 
+        joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), 
+        inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
+    private Set<Student> students;
 
 }

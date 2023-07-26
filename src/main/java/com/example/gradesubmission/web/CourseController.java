@@ -1,5 +1,8 @@
 package com.example.gradesubmission.web;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gradesubmission.entity.Course;
+import com.example.gradesubmission.entity.Student;
 import com.example.gradesubmission.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -31,7 +35,7 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<Course> createCourse(@Valid @RequestBody Course course) {
-        return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.CREATED);
+        return new ResponseEntity<>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
 
     @PutMapping("/{courseId}")
@@ -45,9 +49,19 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/student/{studentId}/course/{courseId}")
+    @GetMapping("/{courseId}/students")
+    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long courseId){
+        return new ResponseEntity<>(courseService.getEnrolledStudents(courseId), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Course>> getCourses(){
+        return new ResponseEntity<>(courseService.getCourses() ,HttpStatus.OK);
+    }
+
+    @PutMapping("/{courseId}/student/{studentId}")
     public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(courseService.addStudentToCourse(studentId, courseId) , HttpStatus.OK);
     }
 
 }
