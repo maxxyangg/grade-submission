@@ -3,6 +3,7 @@ package com.example.gradesubmission.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.stereotype.Service;
 
 
@@ -34,17 +35,16 @@ public class StudentServiceImplementation implements StudentService{
 
     @Override
     public Student updateStudent(Student student, Long id){
-        Optional<Student> wrappedStudent = studentRepository.findById(id);
-        Student unwrappedStudent = unwrapStudent(wrappedStudent, id);
+        Student unwrappedStudent = getStudent(id);
         Student updatedStudent = update(student, unwrappedStudent);
+        saveStudent(updatedStudent);
         return updatedStudent;
     }
 
     @Override
     public void deleteStudent(Long id) {
-        Optional<Student> wrappedStudent = studentRepository.findById(id);
-        Student unwrappStudent = unwrapStudent(wrappedStudent, id);
-        studentRepository.delete(unwrappStudent);
+        Student student = getStudent(id);
+        studentRepository.delete(student);
     }
 
     @Override
