@@ -3,7 +3,7 @@ package com.example.gradesubmission.entity;
 import com.example.gradesubmission.validation.Score;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.annotation.Nonnull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
