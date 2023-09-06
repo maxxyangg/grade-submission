@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.security.config.*;
 
 @Configuration
@@ -22,14 +24,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .headers(headers -> headers.disable()) 
                 .csrf(csrf -> csrf.disable()) //cross site request forgery
                 .authorizeHttpRequests((authz) -> authz
-                .requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET).permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                    .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                    .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 
         return http.build();
