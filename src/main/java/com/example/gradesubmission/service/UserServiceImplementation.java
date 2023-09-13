@@ -26,6 +26,13 @@ public class UserServiceImplementation implements UserService {
         return unwrapUser(wrappedOptional, userId);
     }
 
+    
+    @Override
+    public User getUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return unwrapUser(user, 404L);
+    }
+
     @Override
     public User saveUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
@@ -63,5 +70,8 @@ public class UserServiceImplementation implements UserService {
             throw new EntityNotFoundException(userId, User.class);
         }
     }
+
+
+
     
 }
