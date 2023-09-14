@@ -2,7 +2,6 @@ package com.example.gradesubmission.security.filter;
 
 import java.io.IOException;
 
-
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.gradesubmission.exception.EntityNotFoundException;
@@ -25,11 +24,16 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("Username does not exist");
             response.getWriter().flush();
-        } catch (RuntimeException e) {
+        } catch (JWT) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("JWT Not Valid");
+            response.getWriter().flush();
+        }
+        catch (RuntimeException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("Username does not exist");
             response.getWriter().flush();
-        }
+        } 
     }
 
 }

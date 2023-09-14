@@ -1,7 +1,7 @@
 package com.example.gradesubmission.security;
 
 public class Prefences {
-    public final static String key = "MIIBVwIBADANBgkqhkiG9w0BAQEFAASCAUEwggE9AgEAAkEAlQMzwIloFVcncwESqSP5JcNsOK/zlY3lwSaNr/4WnTRa+OE1Oq0JFwOW906lA4uB9zYKUsNUeTdSg4+sx3ts7QIDAQABAkEAkapkr8ViwuHExY558HAjAQBtTWjrI/pna45FmZI4BwmGNUYK+7O2Jp8wiGlwhsOR0yUp9HSk0QxVwOWZPs4V4QIhAMXEZiwZhSEYGTJ2XPF5UDtZmJDh6pt7eWjYK0vpKOK1AiEAwOOymSPpCeZmLaIM9j5P8MSckBpyq09wMk2EnfkHrFkCIQCkcLq3/nxI2T3STMLZchK5VrVZ+s9VeySnfd76XqPFZQIhAIPUW0EM6P2qKRVxFrjJN6uPRI28dbidj0nh7wxkohjpAiEAmzcNH1Dz8/oWAk9affNOFjSR30Dp9h54MXWGz3vFosw=";
-    public final static int twoHoursInMilli = 7200000;
+    public final static String KEY = "bQeThWmZq4t7w!z$C&F)J@NcRfUjXn2r5u8x/A?D*G-KaPdSgVkYp3s6v9y$B&E)";
+    public final static int EXPIRATION = 7200000;
 
 }

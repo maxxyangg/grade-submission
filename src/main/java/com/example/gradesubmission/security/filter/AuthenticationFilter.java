@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.xml.crypto.AlgorithmMethod;
 
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -32,6 +31,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
+
         try {
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(),
@@ -40,7 +40,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         } catch (IOException ex) {
             throw new RuntimeException();
-        } 
+        }
 
     }
 
@@ -49,14 +49,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             Authentication authResult) throws IOException, ServletException {
         String token = JWT.create()
                 .withSubject(authResult.getName())
-                .withExpiresAt(new Date(System.currentTimeMillis() + Prefences.twoHoursInMilli))
-                .sign(Algorithm.HMAC512(Prefences.key));
+                .withExpiresAt(new Date(System.currentTimeMillis() + Prefences.EXPIRATION))
+                .sign(Algorithm.HMAC512(Prefences.KEY));
         response.addHeader("Authorization", "Bearer " + token);
+
+        
+
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException {
+
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write(exception.getMessage());
         response.getWriter().flush();

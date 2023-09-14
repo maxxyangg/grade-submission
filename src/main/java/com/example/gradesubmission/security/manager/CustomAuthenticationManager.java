@@ -27,6 +27,7 @@ public class CustomAuthenticationManager implements AuthenticationManager{
         if(!passwordEncoder.BCryptEncoder().matches(authentication.getCredentials().toString(), user.getPassword())){
             throw new BadCredentialsException("Username does not exist");
         }else {
+            System.err.println(authentication.getName().toString() + " " + authentication.getCredentials().toString());
             return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), user.getPassword());
         }
     }

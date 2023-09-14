@@ -16,6 +16,7 @@ import org.springframework.util.AntPathMatcher;
 
 import com.example.gradesubmission.security.filter.AuthenticationFilter;
 import com.example.gradesubmission.security.filter.ExceptionHandlerFilter;
+import com.example.gradesubmission.security.filter.JWTAuthorizationFilter;
 import com.example.gradesubmission.security.manager.CustomAuthenticationManager;
 
 import lombok.AllArgsConstructor;
@@ -45,6 +46,7 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
+                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 
         return http.build();
