@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.example.gradesubmission.exception.EntityNotFoundException;
 
 import jakarta.servlet.FilterChain;
@@ -24,12 +25,12 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("Username does not exist");
             response.getWriter().flush();
-        } catch (JWT) {
+        } catch (JWTDecodeException ex) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write("JWT Not Valid");
             response.getWriter().flush();
         }
-        catch (RuntimeException e) {
+        catch (RuntimeException ex) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("Username does not exist");
             response.getWriter().flush();
